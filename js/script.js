@@ -8,6 +8,7 @@ const state = {
     totalResults: 0,
   },
   api: {
+    // insert your api from tmdb
     apiKey: "",
     apiUrl: "https://api.themoviedb.org/3/",
   },
