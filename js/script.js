@@ -8,13 +8,10 @@ const state = {
     totalResults: 0,
   },
   api: {
-    // Register your key at https://www.themoviedb.org/settings/api and enter here
-    // Only use this for development or very small projects. You should store your key and make requests from a server
-    apiKey: "2eae65cab0ad14bea8c4659c137b8869",
+    apiKey: "",
     apiUrl: "https://api.themoviedb.org/3/",
   },
 };
-//
 
 // Display popular TV Shows:
 const displayPopularShows = async () => {
