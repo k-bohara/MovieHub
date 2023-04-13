@@ -9,7 +9,7 @@ const state = {
   },
   api: {
     // insert your api from tmdb
-    apiKey: "2eae65cab0ad14bea8c4659c137b8869",
+    apiKey: "",
     apiUrl: "https://api.themoviedb.org/3/",
   },
 };
