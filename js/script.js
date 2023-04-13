@@ -472,13 +472,13 @@ const showAlert = (message, className = "error") => {
 const fetchAPIData = async (endpoint) => {
   const API_KEY = state.api.apiKey;
   const API_URL = state.api.apiUrl;
-  showSpinner();
+
   const response = await fetch(
     `${API_URL}${endpoint}?api_key=${API_KEY}&language=en-US`
   );
   const data = await response.json();
   // console.log(data);
-  hideSpinner();
+
   return data;
 };
 
@@ -487,27 +487,15 @@ const searchAPIData = async () => {
   const API_KEY = state.api.apiKey;
   const API_URL = state.api.apiUrl;
 
-  showSpinner();
-
   const response = await fetch(
     `${API_URL}search/${state.search.type}?api_key=${API_KEY}&language=en-US&query=${state.search.term}&page=${state.search.page}`
   );
 
   const data = await response.json();
 
-  hideSpinner();
-
   return data;
 };
 
-// Activate spinner
-const showSpinner = () => {
-  document.querySelector(".spinner").classList.add("show");
-};
-// deactivate spinner
-const hideSpinner = () => {
-  document.querySelector(".spinner").classList.remove("show");
-};
 // Highlight active link
 const highlightActiveLink = () => {
   const links = document.querySelectorAll(".nav-link");
