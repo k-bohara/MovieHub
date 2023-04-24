@@ -1,25 +1,25 @@
 const state = {
   currentPage: window.location.pathname,
   search: {
-    term: "",
-    type: "",
+    term: '',
+    type: '',
     page: 1,
     totalPages: 1,
     totalResults: 0,
   },
   api: {
     // insert your api from tmdb
-    apiKey: "",
-    apiUrl: "https://api.themoviedb.org/3/",
+    apiKey: '2eae65cab0ad14bea8c4659c137b8869',
+    apiUrl: 'https://api.themoviedb.org/3/',
   },
 };
 
 // Display popular TV Shows:
 const displayPopularShows = async () => {
-  const { results } = await fetchAPIData("/tv/popular");
+  const { results } = await fetchAPIData('/tv/popular');
   results.forEach((show) => {
-    const divElement = document.createElement("div");
-    divElement.classList.add("card");
+    const divElement = document.createElement('div');
+    divElement.classList.add('card');
     divElement.innerHTML = `
     <a href="tv-details.html?id=${show.id}">
     ${
@@ -44,16 +44,16 @@ const displayPopularShows = async () => {
       </p>
     </div>
   `;
-    document.querySelector("#popular-shows").appendChild(divElement);
+    document.querySelector('#popular-shows').appendChild(divElement);
   });
 };
 
 // Display Popular Movies
 const displayPopularMovies = async () => {
-  const { results } = await fetchAPIData("movie/popular");
+  const { results } = await fetchAPIData('movie/popular');
   results.forEach((movie) => {
-    const divElement = document.createElement("div");
-    divElement.classList.add("card");
+    const divElement = document.createElement('div');
+    divElement.classList.add('card');
     divElement.innerHTML = `
     <a href="movie-details.html?id=${movie.id}">
     ${
@@ -78,20 +78,20 @@ const displayPopularMovies = async () => {
       </p>
     </div>
   `;
-    document.querySelector("#popular-movies").appendChild(divElement);
+    document.querySelector('#popular-movies').appendChild(divElement);
   });
 };
 
 // Display Movie Details
 const displayMovieDetails = async () => {
   // to retrieve id from the url
-  const movieId = window.location.search.split("=")[1];
+  const movieId = window.location.search.split('=')[1];
   const movie = await fetchAPIData(`movie/${movieId}`);
 
   // Overlay for background image
-  displayBackgroundImage("movie", movie.backdrop_path);
+  displayBackgroundImage('movie', movie.backdrop_path);
 
-  const divElement = document.createElement("div");
+  const divElement = document.createElement('div');
 
   divElement.innerHTML = `
   <div class="details-top">
@@ -121,7 +121,7 @@ alt="${movie.title}"
     </p>
     <h5>Genres</h5>
     <ul class="list-group">
-      ${movie.genres.map((genre) => `<li>${genre.name}</li>`).join("")}
+      ${movie.genres.map((genre) => `<li>${genre.name}</li>`).join('')}
     </ul>
     <a href="${
       movie.homepage
@@ -146,21 +146,21 @@ alt="${movie.title}"
   <div class="list-group">
   ${movie.production_companies
     .map((company) => `<span>${company.name}&nbsp; </span>`)
-    .join("")}
+    .join('')}
   </div>
 </div>`;
-  document.querySelector("#movie-details").appendChild(divElement);
+  document.querySelector('#movie-details').appendChild(divElement);
 };
 // Display Show Details
 const displayShowDetails = async () => {
-  const showId = window.location.search.split("=")[1];
+  const showId = window.location.search.split('=')[1];
 
   const show = await fetchAPIData(`tv/${showId}`);
 
   // Overlay for background image
-  displayBackgroundImage("tv", show.backdrop_path);
+  displayBackgroundImage('tv', show.backdrop_path);
 
-  const div = document.createElement("div");
+  const div = document.createElement('div');
 
   div.innerHTML = `
   <div class="details-top">
@@ -191,7 +191,7 @@ const displayShowDetails = async () => {
     </p>
     <h5>Genres</h5>
     <ul class="list-group">
-      ${show.genres.map((genre) => `<li>${genre.name}</li>`).join("")}
+      ${show.genres.map((genre) => `<li>${genre.name}</li>`).join('')}
     </ul>
     <a href="${
       show.homepage
@@ -213,39 +213,39 @@ const displayShowDetails = async () => {
   <div class="list-group">
     ${show.production_companies
       .map((company) => `<span>${company.name}</span>`)
-      .join(", ")}
+      .join(', ')}
   </div>
 </div>
   `;
 
-  document.querySelector("#show-details").appendChild(div);
+  document.querySelector('#show-details').appendChild(div);
 };
 
 // Display Backdrop image on details page
 const displayBackgroundImage = (type, backgroundPath) => {
-  const overlayDiv = document.createElement("div");
+  const overlayDiv = document.createElement('div');
   overlayDiv.style.backgroundImage = `url(https://image.tmdb.org/t/p/original/${backgroundPath})`;
-  overlayDiv.style.backgroundSize = "cover";
-  overlayDiv.style.backgroundPosition = "center";
-  overlayDiv.style.backgroundRepeat = "no-repeat";
-  overlayDiv.style.height = "100vh";
-  overlayDiv.style.width = "100vw";
-  overlayDiv.style.position = "absolute";
-  overlayDiv.style.top = "0";
-  overlayDiv.style.left = "0";
-  overlayDiv.style.zIndex = "-1";
-  overlayDiv.style.opacity = "0.1";
+  overlayDiv.style.backgroundSize = 'cover';
+  overlayDiv.style.backgroundPosition = 'center';
+  overlayDiv.style.backgroundRepeat = 'no-repeat';
+  overlayDiv.style.height = '100vh';
+  overlayDiv.style.width = '100vw';
+  overlayDiv.style.position = 'absolute';
+  overlayDiv.style.top = '0';
+  overlayDiv.style.left = '0';
+  overlayDiv.style.zIndex = '-1';
+  overlayDiv.style.opacity = '0.1';
 
-  if (type === "movie") {
-    document.querySelector("#movie-details").appendChild(overlayDiv);
+  if (type === 'movie') {
+    document.querySelector('#movie-details').appendChild(overlayDiv);
   } else {
-    document.querySelector("#show-details").appendChild(overlayDiv);
+    document.querySelector('#show-details').appendChild(overlayDiv);
   }
 };
 
 // Display similar Movies
 const displaySimilarMovies = async () => {
-  const movieId = window.location.search.split("=")[1];
+  const movieId = window.location.search.split('=')[1];
   console.log(movieId);
 
   // fetch similar movies data from api
@@ -253,8 +253,8 @@ const displaySimilarMovies = async () => {
   console.log(results);
   const res = results.slice(0, 5);
   res.forEach((movie) => {
-    const divElement = document.createElement("div");
-    divElement.classList.add("card");
+    const divElement = document.createElement('div');
+    divElement.classList.add('card');
     divElement.innerHTML = `
       <a href="tv-details.html?id=${movie.id}">
       ${
@@ -279,21 +279,21 @@ const displaySimilarMovies = async () => {
         </p>
       </div>
     `;
-    document.querySelector("#similar-results").appendChild(divElement);
+    document.querySelector('#similar-results').appendChild(divElement);
   });
 };
 
 // Display similar TV Shows
 const displaySimilarTvShows = async () => {
-  const showId = window.location.search.split("=")[1];
+  const showId = window.location.search.split('=')[1];
 
   // fetching similart tv shows data from api
   const { results } = await fetchAPIData(`tv/${showId}/similar`);
 
   const res = results.slice(0, 5);
   res.forEach((show) => {
-    const divElement = document.createElement("div");
-    divElement.classList.add("card");
+    const divElement = document.createElement('div');
+    divElement.classList.add('card');
     divElement.innerHTML = `
       <a href="tv-details.html?id=${show.id}">
       ${
@@ -318,17 +318,17 @@ const displaySimilarTvShows = async () => {
         </p>
       </div>
     `;
-    document.querySelector("#similar-results").appendChild(divElement);
+    document.querySelector('#similar-results').appendChild(divElement);
   });
 };
 
 // Display slider movies that are currently running on threaters
 const displaySlider = async () => {
-  const { results } = await fetchAPIData("movie/now_playing");
+  const { results } = await fetchAPIData('movie/now_playing');
 
   results.forEach((movie) => {
-    const div = document.createElement("div");
-    div.classList.add("swiper-slide");
+    const div = document.createElement('div');
+    div.classList.add('swiper-slide');
 
     div.innerHTML = `
       <a href="movie-details.html?id=${movie.id}">
@@ -339,7 +339,7 @@ const displaySlider = async () => {
       </h4>
     `;
 
-    document.querySelector(".swiper-wrapper").appendChild(div);
+    document.querySelector('.swiper-wrapper').appendChild(div);
 
     initSwiper();
   });
@@ -347,12 +347,12 @@ const displaySlider = async () => {
 
 // Display Slider TV Shows that are currently airing
 const displayTvSlider = async () => {
-  const { results } = await fetchAPIData("tv/on_the_air");
+  const { results } = await fetchAPIData('tv/on_the_air');
 
   results.forEach((show) => {
     console.log(show);
-    const div = document.createElement("div");
-    div.classList.add("swiper-slide");
+    const div = document.createElement('div');
+    div.classList.add('swiper-slide');
 
     div.innerHTML = `
       <a href="tv-details.html?id=${show.id}">
@@ -363,13 +363,13 @@ const displayTvSlider = async () => {
       </h4>
     `;
 
-    document.querySelector(".swiper-wrapper").appendChild(div);
+    document.querySelector('.swiper-wrapper').appendChild(div);
     initSwiper();
   });
 };
 
 const initSwiper = () => {
-  const swiper = new Swiper(".swiper", {
+  const swiper = new Swiper('.swiper', {
     slidesPerView: 1,
     spaceBetween: 30,
     freeMode: true,
@@ -397,34 +397,34 @@ async function search() {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
 
-  state.search.type = urlParams.get("type");
-  state.search.term = urlParams.get("search-term");
+  state.search.type = urlParams.get('type');
+  state.search.term = urlParams.get('search-term');
 
-  if (state.search.term !== "" && state.search.term !== null) {
+  if (state.search.term !== '' && state.search.term !== null) {
     const { results, total_pages, page, total_results } = await searchAPIData();
     state.search.page = page;
     state.search.totalPages = total_pages;
     state.search.totalResults = total_results;
     if (results.length === 0) {
-      showAlert("No results found");
+      showAlert('No results found');
       return;
     }
     displaySearchResults(results);
-    document.querySelector("#search-term").value = "";
+    document.querySelector('#search-term').value = '';
   } else {
-    showAlert("Please enter a search term");
+    showAlert('Please enter a search term');
   }
 }
 
 // Displaying Search Results
 const displaySearchResults = (results) => {
   // clear previous results
-  document.querySelector("#search-results").innerHTML = "";
-  document.querySelector("#search-results-heading").innerHTML = "";
-  document.querySelector("#pagination").innerHTML = "";
+  document.querySelector('#search-results').innerHTML = '';
+  document.querySelector('#search-results-heading').innerHTML = '';
+  document.querySelector('#pagination').innerHTML = '';
   results.forEach((result) => {
-    const divElement = document.createElement("div");
-    divElement.classList.add("card");
+    const divElement = document.createElement('div');
+    divElement.classList.add('card');
     divElement.innerHTML = `
     <a href="${state.search.type}-details.html?id=${result.id}">
     ${
@@ -432,66 +432,66 @@ const displaySearchResults = (results) => {
         ? ` <img
     src="https://image.tmdb.org/t/p/w500/${result.poster_path}"
     class="card-img-top"
-    alt="${state.search.type === "movie" ? result.title : result.name}"
+    alt="${state.search.type === 'movie' ? result.title : result.name}"
   />`
         : `<img
   src="images/no-image.jpg"
   class="card-img-top"
-  alt="${state.search.type === "movie" ? result.title : result.name}"
+  alt="${state.search.type === 'movie' ? result.title : result.name}"
 />`
     }
       
     </a>
     <div class="card-body">
       <h5 class="card-title">${
-        state.search.type === "movie" ? result.title : result.name
+        state.search.type === 'movie' ? result.title : result.name
       }</h5>
       <p class="card-text">
         <small class="text-muted">Release: ${
-          state.search.type === "movie"
+          state.search.type === 'movie'
             ? result.release_date
             : result.first_air_date
         }</small>
       </p>
     </div>
   `;
-    document.querySelector("#search-results-heading").innerHTML = `
+    document.querySelector('#search-results-heading').innerHTML = `
   <h2>${results.length} of ${state.search.totalResults} Results for ${state.search.term}</h2>
 `;
-    document.querySelector("#search-results").appendChild(divElement);
+    document.querySelector('#search-results').appendChild(divElement);
   });
   displayPagination();
 };
 
 // display pagination
 const displayPagination = () => {
-  const div = document.createElement("div");
-  div.classList.add("pagination");
+  const div = document.createElement('div');
+  div.classList.add('pagination');
   div.innerHTML = `
   <button class="btn btn-primary" id="prev">Prev</button>
   <button class="btn btn-primary" id="next">Next</button>
   <div class="page-counter">Page ${state.search.page} of ${state.search.totalPages}</div>
   `;
 
-  document.querySelector("#pagination").appendChild(div);
+  document.querySelector('#pagination').appendChild(div);
 
   // disable previous button if it is the first page
   if (state.search.page === 1) {
-    document.querySelector("#prev").disabled = true;
+    document.querySelector('#prev').disabled = true;
   }
   // disable previous button if it is the last page
   if (state.search.page === state.search.totalPages) {
-    document.querySelector("#next").disabled = true;
+    document.querySelector('#next').disabled = true;
   }
 
   // displaying next page
-  document.querySelector("#next").addEventListener("click", async () => {
+  document.querySelector('#next').addEventListener('click', async () => {
     state.search.page++;
     const { results, total_pages } = await searchAPIData();
     displaySearchResults(results);
   });
   // displaying previous page
-  document.querySelector("#prev").addEventListener("click", async () => {
+  document.querySelector('#prev').addEventListener('click', async () => {
     state.search.page--;
     const { results, total_pages } = await searchAPIData();
     displaySearchResults(results);
@@ -499,11 +499,11 @@ const displayPagination = () => {
 };
 
 // Show Alert Message
-const showAlert = (message, className = "error") => {
-  const alertElement = document.createElement("div");
-  alertElement.classList.add("alert", className);
+const showAlert = (message, className = 'error') => {
+  const alertElement = document.createElement('div');
+  alertElement.classList.add('alert', className);
   alertElement.appendChild(document.createTextNode(message));
-  document.querySelector("#alert").appendChild(alertElement);
+  document.querySelector('#alert').appendChild(alertElement);
 
   setTimeout(() => alertElement.remove(), 3000);
 };
@@ -537,43 +537,43 @@ const searchAPIData = async () => {
 
 // Highlight active link
 const highlightActiveLink = () => {
-  const links = document.querySelectorAll(".nav-link");
+  const links = document.querySelectorAll('.nav-link');
   links.forEach((link) => {
-    if (link.getAttribute("href") == state.currentPage) {
-      link.classList.add("active");
+    if (link.getAttribute('href') == state.currentPage) {
+      link.classList.add('active');
     }
   });
 };
 
 // Function to add commas to budget and revenue
 const addCommasToNumber = (number) => {
-  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 };
 
 // Initialize App
 const init = () => {
   switch (state.currentPage) {
-    case "/":
-    case "/index.html":
+    case '/':
+    case '/index.html':
       displaySlider();
       displayPopularMovies();
       break;
-    case "/shows.html":
+    case '/shows.html':
       displayTvSlider();
       displayPopularShows();
       break;
-    case "/movie-details.html":
+    case '/movie-details.html':
       displayMovieDetails();
       displaySimilarMovies();
       break;
-    case "/tv-details.html":
+    case '/tv-details.html':
       displayShowDetails();
       displaySimilarTvShows();
       break;
-    case "/search.html":
+    case '/search.html':
       search();
       break;
   }
   highlightActiveLink();
 };
-document.addEventListener("DOMContentLoaded", init);
+document.addEventListener('DOMContentLoaded', init);
