@@ -9,7 +9,7 @@ const state = {
   },
   api: {
     // insert your api from tmdb
-    apiKey: '2eae65cab0ad14bea8c4659c137b8869',
+    apiKey: '',
     apiUrl: 'https://api.themoviedb.org/3/',
   },
 };
@@ -20,6 +20,7 @@ const displayPopularShows = async () => {
   results.forEach((show) => {
     const divElement = document.createElement('div');
     divElement.classList.add('card');
+    const showName = show.name.substring(0, 20);
     divElement.innerHTML = `
     <a href="tv-details.html?id=${show.id}">
     ${
@@ -38,7 +39,9 @@ const displayPopularShows = async () => {
       
     </a>
     <div class="card-body">
-      <h5 class="card-title">${show.name}</h5>
+      <h5 class="card-title">${
+        showName.length >= 20 ? `${showName}....` : showName
+      }</h5>
       <p class="card-text">
         <small class="text-muted">Air Date: ${show.first_air_date}</small>
       </p>
@@ -54,6 +57,7 @@ const displayPopularMovies = async () => {
   results.forEach((movie) => {
     const divElement = document.createElement('div');
     divElement.classList.add('card');
+    const movieTitle = movie.title.substring(0, 20);
     divElement.innerHTML = `
     <a href="movie-details.html?id=${movie.id}">
     ${
@@ -72,7 +76,9 @@ const displayPopularMovies = async () => {
       
     </a>
     <div class="card-body">
-      <h5 class="card-title">${movie.title}</h5>
+      <h5 class="card-title">${
+        movieTitle.length >= 20 ? `${movieTitle}....` : movieTitle
+      }</h5>
       <p class="card-text">
         <small class="text-muted">Release: ${movie.release_date}</small>
       </p>
@@ -123,30 +129,26 @@ alt="${movie.title}"
     <ul class="list-group">
       ${movie.genres.map((genre) => `<li>${genre.name}</li>`).join('')}
     </ul>
-    <a href="${
-      movie.homepage
-    }" target="_blank" class="btn">Visit Movie Homepage</a>
+    <a href="${movie.homepage}" target="_blank" class="btn"> Movie Homepage</a>
   </div>
 </div>
 <div class="details-bottom">
   <h2>Movie Info</h2>
   <ul>
-    <li><span class="text-secondary">Budget:</span> $${addCommasToNumber(
+    <li><span class="text-primary">Budget:</span> $${addCommasToNumber(
       movie.budget
     )}</li>
-    <li><span class="text-secondary">Revenue:</span> $${addCommasToNumber(
+    <li><span class="text-primary">Revenue:</span> $${addCommasToNumber(
       movie.revenue
     )}</li>
-    <li><span class="text-secondary">Runtime:</span> ${
-      movie.runtime
-    } minutes</li>
-    <li><span class="text-secondary">Status:</span> ${movie.status}</li>
+    <li><span class="text-primary">Runtime:</span> ${movie.runtime} minutes</li>
+    <li><span class="text-primary">Status:</span> ${movie.status}</li>
   </ul>
-  <h4>Production Companies</h4>
+  <h4 class="text-primary">Production Companies</h4>
   <div class="list-group">
   ${movie.production_companies
-    .map((company) => `<span>${company.name}&nbsp; </span>`)
-    .join('')}
+    .map((company) => `<span>${company.name}</span>`)
+    .join(', ')}
   </div>
 </div>`;
   document.querySelector('#movie-details').appendChild(divElement);
@@ -193,23 +195,21 @@ const displayShowDetails = async () => {
     <ul class="list-group">
       ${show.genres.map((genre) => `<li>${genre.name}</li>`).join('')}
     </ul>
-    <a href="${
-      show.homepage
-    }" target="_blank" class="btn">Visit show Homepage</a>
+    <a href="${show.homepage}" target="_blank" class="btn">TV Show Homepage</a>
   </div>
 </div>
 <div class="details-bottom">
   <h2>Show Info</h2>
   <ul>
-    <li><span class="text-secondary">Number of Episodes:</span> ${
+    <li><span class="text-primary">Number of Episodes:</span> ${
       show.number_of_episodes
     }</li>
-    <li><span class="text-secondary">Last Episode To Air:</span> ${
+    <li><span class="text-primary">Last Episode To Air:</span> ${
       show.last_episode_to_air.name
     }</li>
-    <li><span class="text-secondary">Status:</span> ${show.status}</li>
+    <li><span class="text-primary">Status:</span> ${show.status}</li>
   </ul>
-  <h4>Production Companies</h4>
+  <h4 class="text-primary">Production Companies</h4>
   <div class="list-group">
     ${show.production_companies
       .map((company) => `<span>${company.name}</span>`)
@@ -246,12 +246,10 @@ const displayBackgroundImage = (type, backgroundPath) => {
 // Display similar Movies
 const displaySimilarMovies = async () => {
   const movieId = window.location.search.split('=')[1];
-  console.log(movieId);
-
   // fetch similar movies data from api
   const { results } = await fetchAPIData(`movie/${movieId}/similar`);
-  console.log(results);
-  const res = results.slice(0, 5);
+
+  const res = results.slice(0, 8);
   res.forEach((movie) => {
     const divElement = document.createElement('div');
     divElement.classList.add('card');
@@ -290,7 +288,7 @@ const displaySimilarTvShows = async () => {
   // fetching similart tv shows data from api
   const { results } = await fetchAPIData(`tv/${showId}/similar`);
 
-  const res = results.slice(0, 5);
+  const res = results.slice(0, 8);
   res.forEach((show) => {
     const divElement = document.createElement('div');
     divElement.classList.add('card');
@@ -335,7 +333,7 @@ const displaySlider = async () => {
         <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}" />
       </a>
       <h4 class="swiper-rating">
-        <i class="fas fa-star text-secondary"></i> ${movie.vote_average} / 10
+        <i class="fas fa-star text-primary"></i> ${movie.vote_average} / 10
       </h4>
     `;
 
@@ -359,7 +357,7 @@ const displayTvSlider = async () => {
         <img src="https://image.tmdb.org/t/p/w500${show.poster_path}" alt="${show.name}" />
       </a>
       <h4 class="swiper-rating">
-        <i class="fas fa-star text-secondary"></i> ${show.vote_average} / 10
+        <i class="fas fa-star text-primary"></i> ${show.vote_average} / 10
       </h4>
     `;
 
