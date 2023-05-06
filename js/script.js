@@ -9,7 +9,7 @@ const state = {
   },
   api: {
     // insert your api from tmdb
-    apiKey: '2eae65cab0ad14bea8c4659c137b8869',
+    apiKey: '2eae65cab0ad12e5ad8ac466959c137b88',
     apiUrl: 'https://api.themoviedb.org/3/',
   },
 };
@@ -31,7 +31,7 @@ const displayPopularShows = async () => {
     alt="${show.name}"
   />`
         : `<img
-  src="images/no-image.jpg"
+  src="images/no-image.png"
   class="card-img-top"
   alt="${show.name}"
 />`
@@ -68,7 +68,7 @@ const displayPopularMovies = async () => {
     alt="${movie.title}"
   />`
         : `<img
-  src="images/no-image.jpg"
+  src="images/no-image.png"
   class="card-img-top"
   alt="${movie.title}"
 />`
@@ -110,7 +110,7 @@ const displayMovieDetails = async () => {
   alt="${movie.title}"
 />`
       : `<img
-src="images/no-image.jpg"
+src="images/no-image.pn"
 class="card-img-top"
 alt="${movie.title}"
 />`
@@ -176,7 +176,7 @@ const displayShowDetails = async () => {
     alt="${show.name}"
   />`
       : `<img
-  src="../images/no-image.jpg"
+  src="../images/no-image.png"
   class="card-img-top"
   alt="${show.name}"
 />`
@@ -255,7 +255,8 @@ const displaySimilarMovies = async () => {
       alt="${movie.title}"
     />`
           : `<img
-    src="images/no-image.jpg"
+    src="images/no-image.png
+"
     class="card-img-movie
     alt="${movie.title}"
   />`
@@ -294,7 +295,8 @@ const displaySimilarTvShows = async () => {
       alt="${show.name}"
     />`
           : `<img
-    src="images/no-image.jpg"
+    src="images/no-image.png
+"
     class="card-img-top"
     alt="${show.name}"
   />`
@@ -425,7 +427,7 @@ const displaySearchResults = (results) => {
     alt="${state.search.type === 'movie' ? result.title : result.name}"
   />`
         : `<img
-  src="images/no-image.jpg"
+  src="images/no-image.png"
   class="card-img-top"
   alt="${state.search.type === 'movie' ? result.title : result.name}"
 />`

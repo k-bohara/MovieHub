@@ -12,6 +12,14 @@ Sign Up for [TMDB API](https://www.themoviedb.org/signup) and get the api key an
 
 ## Screenshots
 
+Movie Page
+
 ![index](/screenshots/movies.png)
+
+Tv Show Page
+
 ![index](/screenshots/tv-show.png)
+
+Search Page
+
 ![index](/screenshots/movie-search.png)
