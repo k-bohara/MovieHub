@@ -9,7 +9,7 @@ const state = {
   },
   api: {
     // insert your api from tmdb
-    apiKey: '',
+    apiKey: '2eae65cab0ad14bea8c4659c137b8869',
     apiUrl: 'https://api.themoviedb.org/3/',
   },
 };
@@ -43,7 +43,7 @@ const displayPopularShows = async () => {
         showName.length >= 20 ? `${showName}....` : showName
       }</h5>
       <p class="card-text">
-        <small class="text-muted">Air Date: ${show.first_air_date}</small>
+        <small class="text-muted">${show.first_air_date}</small>
       </p>
     </div>
   `;
@@ -80,7 +80,7 @@ const displayPopularMovies = async () => {
         movieTitle.length >= 20 ? `${movieTitle}....` : movieTitle
       }</h5>
       <p class="card-text">
-        <small class="text-muted">Release: ${movie.release_date}</small>
+        <small class="text-muted">${movie.release_date}</small>
       </p>
     </div>
   `;
@@ -153,6 +153,7 @@ alt="${movie.title}"
 </div>`;
   document.querySelector('#movie-details').appendChild(divElement);
 };
+
 // Display Show Details
 const displayShowDetails = async () => {
   const showId = window.location.search.split('=')[1];
@@ -221,21 +222,12 @@ const displayShowDetails = async () => {
   document.querySelector('#show-details').appendChild(div);
 };
 
-// Display Backdrop image on details page
+// Display backdrop image on details page
 const displayBackgroundImage = (type, backgroundPath) => {
   const overlayDiv = document.createElement('div');
   overlayDiv.style.backgroundImage = `url(https://image.tmdb.org/t/p/original/${backgroundPath})`;
-  overlayDiv.style.backgroundSize = 'cover';
-  overlayDiv.style.backgroundPosition = 'center';
-  overlayDiv.style.backgroundRepeat = 'no-repeat';
-  overlayDiv.style.height = '100vh';
-  overlayDiv.style.width = '100vw';
-  overlayDiv.style.position = 'absolute';
-  overlayDiv.style.top = '0';
-  overlayDiv.style.left = '0';
-  overlayDiv.style.zIndex = '-1';
-  overlayDiv.style.opacity = '0.1';
 
+  overlayDiv.classList.add('overlay');
   if (type === 'movie') {
     document.querySelector('#movie-details').appendChild(overlayDiv);
   } else {
@@ -273,7 +265,7 @@ const displaySimilarMovies = async () => {
       <div class="card-body">
         <h5 class="card-title">${movie.title}</h5>
         <p class="card-text">
-          <small class="text-muted">Air Date: ${movie.release_date}</small>
+          <small class="text-muted">${movie.release_date}</small>
         </p>
       </div>
     `;
@@ -312,7 +304,7 @@ const displaySimilarTvShows = async () => {
       <div class="card-body">
         <h5 class="card-title">${show.name}</h5>
         <p class="card-text">
-          <small class="text-muted">Air Date: ${show.first_air_date}</small>
+          <small class="text-muted">${show.first_air_date}</small>
         </p>
       </div>
     `;

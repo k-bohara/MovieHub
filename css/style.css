@@ -233,7 +233,6 @@ section h2 {
   display: block;
   margin: 4rem 0 2rem;
   padding-bottom: 2rem;
-  /* border-bottom: #ccc solid 1px; */
 }
 
 .details-top img {
@@ -313,8 +312,8 @@ section h2 {
 .search .container form input[type='text']:focus {
   outline: none;
 }
-.search .container form input[type='radio']:checked{
-  accent-color:var(--color-secondary);
+.search .container form input[type='radio']:checked {
+  accent-color: var(--color-secondary);
 }
 
 .search .container form button {
@@ -358,6 +357,19 @@ section h2 {
   background: red;
 }
 
+.overlay {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  opacity: 0.1;
+}
+
 @media (min-width: 768px) {
   .grid {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -375,16 +387,5 @@ section h2 {
   section h2 {
     margin: 3rem 0;
     position: relative;
-  }
-  /* section h2::after {
-    content: '';
-    background: #fff;
-    width: 80px;
-    height: 5px;
-    border-radius: 5px;
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%); */
   }
 }
