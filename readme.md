@@ -8,4 +8,10 @@ $ git clone https://github.com/k-bohara/MovieHub.git
 
 ### Get API key
 
-Sign Up for [TMDB API](https://www.themoviedb.org/signup) and get the api key.
+Sign Up for [TMDB API](https://www.themoviedb.org/signup) and get the api key and inset your api key into state object in script.js
+
+## Screenshots
+
+![index](/screenshots/movies.png)
+![index](/screenshots/tvshows.png)
+![index](/screenshots/movie-search.png)
